@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard - Campus Connect</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <link href="../assets/css/dashboard.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+</head>
+<body class="bg-light">
+    <!-- Modern Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <!-- Brand -->
+            <a class="navbar-brand brand-stack" href="index.html">
+                <img src="../assets/images/logo.png" alt="SEU Logo">
+                <span>SEU Issue Tracker</span>
+            </a>
+
+            <!-- Mobile Toggle -->
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navigation Items -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Main Navigation -->
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="dashboard.html">
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="events.html">
+                            Events
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="report.html">
+                            Report Issue
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- User Actions (no dropdowns) -->
+                <div class="navbar-nav align-items-center">
+                    <!-- User Icon (no dropdown) -->
+                    <span class="nav-link d-flex align-items-center user-profile-trigger" id="userProfileTrigger">
+                        <div class="user-avatar me-2">
+                            <i class="fas fa-user-circle fs-4"></i>
+                        </div>
+                        <span class="user-name d-none d-md-inline">User</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container py-4">
+
+
+        <!-- Welcome Message -->
+        <div class="row">
+            <div class="col-12">
+                <div class="content-card welcome-message-card">
+                    <div class="card-body text-center py-5">
+                        <div class="welcome-icon mb-4">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h2 class="welcome-title mb-3">
+                            Welcome back, <span class="user-name">User</span>!
+                        </h2>
+                        <p class="welcome-subtitle mb-4">Here's what's happening on campus today.</p>
+                        <div class="welcome-actions">
+                            <a href="report.html" class="btn btn-primary btn-lg me-3">
+                                <i class="fas fa-plus me-2"></i>Add Report
+                            </a>
+                            <a href="events.html" class="btn btn-outline-primary btn-lg">
+                                <i class="fas fa-calendar-plus me-2"></i>View Events
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="brand-stack">
+                        <img src="../assets/images/logo.png" alt="SEU Logo">
+                        <span>SEU Issue Tracker</span>
+                    </h5>
+                    <p>
+                        South Eastern University of Sri Lanka – Faculty of Applied Sciences
+                    </p>
+                </div>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="dashboard.html" class="text-light">Dashboard</a></li>
+                        <li><a href="events.html" class="text-light">Events</a></li>
+                        <li><a href="report.html" class="text-light">Report Issue</a></li>
+                        <li><a href="index.html" class="text-light">Home</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5>Contact</h5>
+                    <p>
+                        <i class="fas fa-envelope me-2"></i>
+                        support@seu.ac.lk<br>
+                        <i class="fas fa-phone me-2"></i>
+                        +94 11 123 4567
+                    </p>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2024 Campus Connect. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>Southeastern University</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
+
+    <!-- User Profile Popup -->
+    <div id="userProfilePopup" class="user-profile-popup">
+        <div class="user-profile-info">
+            <div class="user-profile-name" id="popupUserName">User Name</div>
+            <div class="user-profile-email" id="popupUserEmail">user@email.com</div>
+        </div>
+        <button class="btn btn-danger w-100 mt-3" id="logoutBtn">Logout</button>
+    </div>
+</body>
+</html>

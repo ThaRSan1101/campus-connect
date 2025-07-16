@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - Campus Connect</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="../assets/css/events.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+</head>
+<body class="bg-light">
+    <!-- Modern Navigation (copied from dashboard.html) -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <!-- Brand -->
+            <a class="navbar-brand brand-stack" href="index.html">
+                <img src="../assets/images/logo.png" alt="SEU Logo">
+                <span>SEU Issue Tracker</span>
+            </a>
+            <!-- Mobile Toggle -->
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Navigation Items -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Main Navigation -->
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="events.html">
+                            Events
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="report.html">
+                            Report Issue
+                        </a>
+                    </li>
+                </ul>
+                <!-- User Actions (no dropdowns) -->
+                <div class="navbar-nav align-items-center">
+                    <!-- User Icon (popup trigger) -->
+                    <span class="nav-link d-flex align-items-center user-profile-trigger" id="userProfileTrigger" style="cursor: pointer;">
+                        <div class="user-avatar me-2">
+                            <i class="fas fa-user-circle fs-4"></i>
+                        </div>
+                        <span class="user-name d-none d-md-inline">User</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- User Profile Popup -->
+    <div id="userProfilePopup" class="user-profile-popup" style="display: none;">
+        <div class="user-profile-info">
+            <div class="user-profile-name" id="popupUserName">User Name</div>
+            <div class="user-profile-email" id="popupUserEmail">user@email.com</div>
+        </div>
+        <button class="btn btn-danger w-100 mt-3" id="logoutBtn">Logout</button>
+    </div>
+    <!-- User Profile Popup Script -->
+    <script>
+    function getUserInfo() {
+        return {
+            name: localStorage.getItem('userName') || 'User Name',
+            email: localStorage.getItem('userEmail') || 'user@email.com'
+        };
+    }
+    const trigger = document.getElementById('userProfileTrigger');
+    const popup = document.getElementById('userProfilePopup');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const popupUserName = document.getElementById('popupUserName');
+    const popupUserEmail = document.getElementById('popupUserEmail');
+    if (trigger && popup) {
+        trigger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const user = getUserInfo();
+            popupUserName.textContent = user.name;
+            popupUserEmail.textContent = user.email;
+            const rect = trigger.getBoundingClientRect();
+            popup.style.display = 'block';
+            popup.style.position = 'absolute';
+            popup.style.top = (window.scrollY + rect.bottom + 8) + 'px';
+            popup.style.left = (rect.left) + 'px';
+            popup.style.zIndex = 3000;
+        });
+        document.addEventListener('click', function(e) {
+            if (!popup.contains(e.target) && e.target !== trigger) {
+                popup.style.display = 'none';
+            }
+        });
+    }
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function() {
+            window.location.href = 'http://localhost/campus-connect/frontend/pages/login.html';
+        });
+    }
+    </script>
+
+    <!-- Events Content -->
+    <div class="container py-4">
+        <div id="noEventsBox">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                    <div class="card">
+                        <div class="card-body">
+                            <i class="fas fa-calendar-times fa-3x text-muted mb-3"></i>
+                            <h5>No Events Found</h5>
+                            <p class="text-muted">There are no events matching your criteria at the moment.</p>
+                            <a href="#" class="btn btn-primary mt-3">View More Events</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Remove the Join Event button from the event card -->
+        <!-- <div class="row justify-content-center mt-4">
+            <div class="col-md-6">
+                <div class="card shadow-sm event-card">
+                    <div class="card-body">
+                        <h5 class="card-title mb-2">
+                            <i class="fas fa-calendar-alt me-2 text-primary"></i>
+                            Campus Cleanup Drive
+                        </h5>
+                        <p class="mb-1 text-muted">
+                            <i class="fas fa-clock me-1"></i>
+                            10:00 AM – 1:00 PM, 25th June 2024
+                        </p>
+                        <p class="mb-2 text-muted">
+                            <i class="fas fa-map-marker-alt me-1"></i>
+                            Main Campus Grounds
+                        </p>
+                        <p>
+                            Join us for a campus-wide cleanup event! All students are welcome. Refreshments provided.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+    </div> 
+    <script>
+    // Hide the No Events Found box if any event-card exists
+    window.addEventListener('DOMContentLoaded', function() {
+        if (document.querySelector('.event-card')) {
+            var noEventsBox = document.getElementById('noEventsBox');
+            if (noEventsBox) noEventsBox.style.display = 'none';
+        }
+    });
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="brand-stack">
+                        <img src="../assets/images/logo.png" alt="SEU Logo">
+                        <span>SEU Issue Tracker</span>
+                    </h5>
+                    <p>
+                        South Eastern University of Sri Lanka – Faculty of Applied Sciences
+                    </p>
+                </div>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="dashboard.html" class="text-light">Dashboard</a></li>
+                        <li><a href="events.html" class="text-light">Events</a></li>
+                        <li><a href="report.html" class="text-light">Report Issue</a></li>
+                        <li><a href="index.html" class="text-light">Home</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5>Contact</h5>
+                    <p>
+                        <i class="fas fa-envelope me-2"></i>
+                        support@seu.ac.lk<br>
+                        <i class="fas fa-phone me-2"></i>
+                        +94 11 123 4567
+                    </p>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2024 Campus Connect. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>Southeastern University</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/events.js"></script>
+</body>
+</html> 

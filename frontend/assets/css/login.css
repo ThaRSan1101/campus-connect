@@ -1,0 +1,203 @@
+/* login.css - Styles for login.html */
+
+:root {
+    --primary-color: #640f1c;
+    --secondary-color: #640f1c;
+    --accent-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --light-gray: #f8f9fa;
+    --dark-gray: #343a40;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 24px rgba(44,90,160,0.08);
+    --transition: all 0.3s cubic-bezier(.4,0,.2,1);
+}
+
+html, body {
+    min-height: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--light-gray);
+    color: var(--dark-gray);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.7;
+    overflow-x: hidden !important;
+}
+
+body > .container {
+    flex: 1 0 auto;
+}
+
+.container {
+    max-width: 1200px;
+    overflow-x: hidden !important;
+}
+
+/* Navbar */
+.navbar {
+    background: var(--primary-color) !important;
+    box-shadow: var(--box-shadow);
+    padding: 0.75rem 0;
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1050;
+}
+
+body {
+    padding-top: 76px !important;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 60px !important;
+    }
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.7rem;
+    color: #fff !important;
+    letter-spacing: 1px;
+}
+.navbar-nav .nav-link {
+    color: #fff !important;
+    font-weight: 500;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    border-radius: 6px;
+    transition: var(--transition);
+}
+.navbar-nav .nav-link.active, .navbar-nav .nav-link:hover {
+    background: rgba(255,255,255,0.12);
+    color: #fff !important;
+}
+
+/* Login Card */
+.card {
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 2rem;
+    background: #fff;
+    transition: var(--transition);
+}
+.card-header {
+    background: var(--primary-color) !important;
+    color: #fff;
+    border-radius: var(--border-radius) var(--border-radius) 0 0 !important;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    padding: 0.7rem 1.5rem;
+    transition: var(--transition);
+}
+.btn-primary {
+    background: var(--primary-color) !important;
+    color: #fff;
+    border: none;
+}
+.btn-primary:hover {
+    filter: brightness(1.08);
+    transform: translateY(-2px) scale(1.03);
+}
+.btn-outline-primary {
+    border: 2px solid #640f1c;
+    color: #640f1c !important;
+    background: transparent;
+}
+.btn-outline-primary:hover, .btn-outline-primary:focus {
+    background: #640f1c !important;
+    color: #fff !important;
+    border: 2px solid #640f1c;
+    outline: 2px solid #640f1c;
+}
+
+.form-control, .form-select {
+    border-radius: 8px;
+    border: 2px solid #e9ecef;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(44,90,160,0.12);
+}
+.form-label {
+    font-weight: 600;
+    color: var(--dark-gray);
+    margin-bottom: 0.5rem;
+}
+
+.footer {
+    flex-shrink: 0;
+    background: #343a40 !important;
+    color: #fff !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    margin-top: 0 !important;
+    padding-top: 3rem !important;
+    padding-bottom: 2rem !important;
+    margin-bottom: 0 !important;
+}
+.footer h5 {
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 1.2rem;
+    color: #fff !important;
+}
+.footer p, .footer ul {
+    color: #fff !important;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+.footer a {
+    color: #fff !important;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.footer a:hover {
+    color: var(--accent-color);
+}
+
+/* Brand stack for navbar and footer */
+.brand-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.2rem;
+}
+.brand-stack img {
+    height: 32px;
+    width: auto;
+    margin: 0;
+    display: block;
+}
+.brand-stack span {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+    line-height: 1.1;
+}
+.footer .brand-stack span {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+}
+@media (max-width: 576px) {
+    .brand-stack img {
+        height: 26px;
+    }
+    .brand-stack span {
+        font-size: 1rem;
+    }
+} 

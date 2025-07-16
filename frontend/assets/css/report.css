@@ -1,0 +1,243 @@
+/* Modern Navigation and Report Page Styles (migrated from dashboard.css) */
+:root {
+    --primary-color: #640f1c;
+    --secondary-color: #640f1c;
+    --accent-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --light-gray: #f8f9fa;
+    --dark-gray: #343a40;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 24px rgba(44,90,160,0.08);
+    --transition: all 0.3s cubic-bezier(.4,0,.2,1);
+}
+
+html, body {
+    min-height: 100vh;
+    background: var(--light-gray);
+    color: var(--dark-gray);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.7;
+    overflow-x: hidden !important;
+    margin: 0;
+    padding: 0;
+}
+
+/* Use flexbox to ensure footer stays at bottom */
+body {
+    display: flex;
+    flex-direction: column;
+    padding-top: 76px !important;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 60px !important;
+    }
+}
+
+.container {
+    max-width: 1200px;
+    overflow-x: hidden !important;
+}
+
+/* Fixed navbar */
+.navbar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1050;
+    background: var(--primary-color) !important;
+    box-shadow: 0 2px 20px rgba(44,90,160,0.15);
+    padding: 0.75rem 0;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #fff !important;
+    letter-spacing: 1px;
+    text-decoration: none;
+}
+
+.navbar-nav .nav-link {
+    color: rgba(255,255,255,0.9) !important;
+    font-weight: 500;
+    padding: 0.75rem 1.25rem !important;
+    border-radius: 8px;
+    transition: var(--transition);
+    margin: 0 0.25rem;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    background: rgba(255,255,255,0.15);
+    color: #fff !important;
+    transform: translateY(-1px);
+}
+
+.navbar-toggler {
+    border: none;
+    padding: 0.5rem;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.user-avatar {
+    display: flex;
+    align-items: center;
+    color: #fff;
+}
+
+.user-name {
+    color: #fff;
+    font-weight: 500;
+}
+
+/* Main content area - flex grow to push footer down */
+.container.py-4 {
+    flex: 1;
+    padding-top: 3rem !important;
+    padding-bottom: 2rem !important;
+}
+
+/* Footer - positioned at bottom */
+.footer {
+    background: #343a40 !important;
+    color: #fff !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    margin-top: 0 !important;
+    padding-top: 3rem !important;
+    padding-bottom: 2rem !important;
+    margin-bottom: 0 !important;
+}
+
+.footer h5 {
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 1.2rem;
+    color: #fff !important;
+}
+
+.footer p, .footer ul {
+    color: #fff !important;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.footer a {
+    color: #fff !important;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer a:hover {
+    color: var(--accent-color);
+}
+
+/* User Profile Popup Styles */
+.user-profile-popup {
+    min-width: 240px;
+    max-width: 320px;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 8px 32px rgba(44,90,160,0.15);
+    padding: 1.5rem 1.25rem 1.25rem 1.25rem;
+    position: absolute;
+    z-index: 3000;
+    display: none;
+    border: 1px solid #e9ecef;
+}
+
+.user-profile-info {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.user-profile-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin-bottom: 0.25rem;
+}
+
+.user-profile-email {
+    font-size: 0.97rem;
+    color: #555;
+    opacity: 0.85;
+    word-break: break-all;
+}
+
+#logoutBtn {
+    margin-top: 1rem;
+} 
+
+.navbar, .btn-primary, .card-header {
+    background: var(--primary-color) !important;
+    color: #fff !important;
+}
+
+.section-title {
+    color: var(--primary-color) !important;
+}
+
+.btn-outline-primary {
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color) !important;
+}
+
+.btn-outline-primary:hover {
+    background: var(--primary-color) !important;
+    color: #fff !important;
+} 
+
+/* Brand stack for navbar and footer */
+.brand-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.2rem;
+}
+.brand-stack img {
+    height: 32px;
+    width: auto;
+    margin: 0;
+    display: block;
+}
+.brand-stack span {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+    line-height: 1.1;
+}
+.footer .brand-stack span {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+}
+@media (max-width: 576px) {
+    .brand-stack img {
+        height: 26px;
+    }
+    .brand-stack span {
+        font-size: 1rem;
+    }
+} 
+
+.btn.btn-primary {
+    background: var(--primary-color) !important;
+    color: #fff !important;
+    border: 2px solid var(--primary-color) !important;
+    box-shadow: 0 2px 8px rgba(100,15,28,0.10);
+}
+.btn.btn-primary:hover {
+    background: #560c17 !important;
+    color: #fff !important;
+    border-color: #560c17 !important;
+} 

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Users - SEU Issue Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="../../assets/css/manage-users.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../../assets/images/favicon.png">
+</head>
+<body class="bg-light">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand brand-stack" href="../../index.html">
+                <img src="../../assets/images/logo.png" alt="SEU Logo">
+                <span>SEU Issue Tracker</span>
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin-dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="manage-events.html">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="manage-reports.html">Reports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="manage-users.html">Users</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="#" id="adminProfileBtn">
+                            <i class="fas fa-user-circle fa-lg me-2"></i>
+                            <span>Admin Profile</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="adminLogoutPopup" class="admin-logout-popup">
+        <button class="btn btn-danger w-100" id="adminLogoutBtn">Logout</button>
+    </div>
+    <div class="container py-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="mb-0"><i class="fas fa-users me-2"></i>Manage Users</h2>
+        </div>
+        <div class="card">
+            <div class="card-header bg-gradient text-white">
+                <h5 class="mb-0"><i class="fas fa-users-cog me-2"></i>User List</h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Join Date</th>
+                                <th>Role</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Dynamic user rows will be inserted here by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="brand-stack">
+                        <img src="../../assets/images/logo.png" alt="SEU Logo">
+                        <span>SEU Issue Tracker</span>
+                    </h5>
+                    <p>South Eastern University of Sri Lanka – Faculty of Applied Sciences</p>
+                </div>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="admin-dashboard.html" class="text-light">Admin Dashboard</a></li>
+                        <li><a href="manage-events.html" class="text-light">Events</a></li>
+                        <li><a href="manage-reports.html" class="text-light">Reports</a></li>
+                        <li><a href="manage-users.html" class="text-light">Users</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5>Contact</h5>
+                    <p><i class="fas fa-envelope me-2"></i>support@seu.ac.lk<br><i class="fas fa-phone me-2"></i>+94 11 123 4567</p>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2024 SEU Issue Tracker. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>South Eastern University</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/manage-users.js"></script>
+</body>
+</html> 

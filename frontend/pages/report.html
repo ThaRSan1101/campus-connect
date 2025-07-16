@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Issue - Campus Connect</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="../assets/css/report.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    <!-- Modern Navigation (copied from dashboard.html) -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <!-- Brand -->
+            <a class="navbar-brand brand-stack" href="index.html">
+                <img src="../assets/images/logo.png" alt="SEU Logo">
+                <span>SEU Issue Tracker</span>
+            </a>
+            <!-- Mobile Toggle -->
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Navigation Items -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Main Navigation -->
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="events.html">
+                            Events
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="report.html">
+                            Report Issue
+                        </a>
+                    </li>
+                </ul>
+                <!-- User Actions (no dropdowns) -->
+                <div class="navbar-nav align-items-center">
+                    <!-- User Icon (popup trigger) -->
+                    <span class="nav-link d-flex align-items-center user-profile-trigger" id="userProfileTrigger" style="cursor: pointer;">
+                        <div class="user-avatar me-2">
+                            <i class="fas fa-user-circle fs-4"></i>
+                        </div>
+                        <span class="user-name d-none d-md-inline">User</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- User Profile Popup -->
+    <div id="userProfilePopup" class="user-profile-popup" style="display: none;">
+        <div class="user-profile-info">
+            <div class="user-profile-name" id="popupUserName">User Name</div>
+            <div class="user-profile-email" id="popupUserEmail">user@email.com</div>
+        </div>
+        <button class="btn btn-danger w-100 mt-3" id="logoutBtn">Logout</button>
+    </div>
+    <!-- User Profile Popup Script -->
+</head>
+<body class="bg-light">
+    <!-- Report Form Section -->
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-custom">
+                    <div class="card-header">
+                        <h4 class="mb-0">
+                            <i class="fas fa-exclamation-circle me-2"></i>
+                            Report an Issue
+                        </h4>
+                        <p class="text-secondary mb-0">Let us know about any problem you face on campus. Your report helps us improve campus life.</p>
+                    </div>
+                    <div class="card-body p-4">
+                        <form id="reportForm" enctype="multipart/form-data">
+                            <!-- Location Section -->
+                            <div class="mb-4">
+                                <h5 class="mb-3">
+                                    <i class="fas fa-map-marker-alt me-2 text-primary"></i>
+                                    Location Details
+                                </h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="location" class="form-label">Location</label>
+                                        <select class="form-select" id="location" name="location" required>
+                                            <option value="">Select a location</option>
+                                            <option value="Main Campus Grounds">Main Campus Grounds</option>
+                                            <option value="Student Center">Student Center</option>
+                                            <option value="Library">Library</option>
+                                            <option value="Cafeteria">Cafeteria</option>
+                                            <option value="Parking Lot">Parking Lot</option>
+                                            <option value="Sports Complex">Sports Complex</option>
+                                            <option value="Academic Building A">Academic Building A</option>
+                                            <option value="Academic Building B">Academic Building B</option>
+                                            <option value="Dormitory Area">Dormitory Area</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="customLocation" class="form-label">Custom Location (if "Other" selected)</label>
+                                        <input type="text" class="form-control" id="customLocation" 
+                                               placeholder="Specify the exact location">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Issue Description -->
+                            <div class="mb-4">
+                                <h5 class="mb-3">
+                                    <i class="fas fa-clipboard-list me-2 text-primary"></i>
+                                    Issue Details
+                                </h5>
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Describe the issue</label>
+                                    <textarea class="form-control" id="description" name="description" rows="4" 
+                                              placeholder="Please provide a detailed description of the issue..." required></textarea>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="issueType" class="form-label">Type of Issue</label>
+                                        <select class="form-select" id="issueType" name="issueType">
+                                            <option value="">Select issue type</option>
+                                            <option value="Facility">Facility</option>
+                                            <option value="Safety">Safety</option>
+                                            <option value="Academic">Academic</option>
+                                            <option value="Cleanliness">Cleanliness</option>
+                                            <option value="Technical">Technical</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                    <!-- Removed Urgency Level field -->
+                                </div>
+                            </div>
+
+                            <!-- Photo Upload -->
+                            <div class="mb-4">
+                                <h5 class="mb-3">
+                                    <i class="fas fa-camera me-2 text-primary"></i>
+                                    Photo Evidence (Optional)
+                                </h5>
+                                <div class="mb-3">
+                                    <label for="photo" class="form-label">Upload Photo</label>
+                                    <input type="file" class="form-control" id="photo" name="photo" accept="image/*">
+                                    <div class="form-text">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        Supported formats: JPG, PNG, GIF (Max 5MB)
+                                    </div>
+                                </div>
+                                <div id="imagePreview" class="d-none">
+                                    <img id="preview" src="" alt="Preview" class="img-fluid rounded">
+                                    <button type="button" class="btn btn-sm btn-outline-danger mt-2" id="removeImageBtn">
+                                        <i class="fas fa-trash me-1"></i>Remove Image
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Additional Information -->
+                            <div class="mb-4">
+                                <h5 class="mb-3">
+                                    <i class="fas fa-info-circle me-2 text-primary"></i>
+                                    Additional Information
+                                </h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="timeObserved" class="form-label">When did you observe this?</label>
+                                        <input type="datetime-local" class="form-control" id="timeObserved" name="timeObserved">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="contactInfo" class="form-label">Contact for follow-up (Optional)</label>
+                                        <input type="text" class="form-control" id="contactInfo" name="contactInfo" 
+                                               placeholder="Your phone number or additional contact info">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-paper-plane me-2"></i>
+                                    Submit Report
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="brand-stack">
+                        <img src="../assets/images/logo.png" alt="SEU Logo">
+                        <span>SEU Issue Tracker</span>
+                    </h5>
+                    <p>
+                        South Eastern University of Sri Lanka – Faculty of Applied Sciences
+                    </p>
+                </div>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="dashboard.html" class="text-light">Dashboard</a></li>
+                        <li><a href="events.html" class="text-light">Events</a></li>
+                        <li><a href="report.html" class="text-light">Report Issue</a></li>
+                        <li><a href="index.html" class="text-light">Home</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5>Contact</h5>
+                    <p>
+                        <i class="fas fa-envelope me-2"></i>
+                        support@seu.ac.lk<br>
+                        <i class="fas fa-phone me-2"></i>
+                        +94 11 123 4567
+                    </p>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2024 Campus Connect. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>Southeastern University</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/report.js"></script>
+</body>
+</html> 
