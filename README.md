@@ -141,12 +141,3 @@ If you want to contribute:
 ## Suggested GitHub topics
 
 php, mysql, bootstrap, webapp, issue-tracker, education
-
----
-
-If you'd like, I can now:
-- Commit this README.md to the repository (done) and open it for review
-- Add a short CONTRIBUTING.md or a minimal .gitignore
-- Create a short repo description and topics in a GitHub-ready format
-
-Tell me what you'd like next.
