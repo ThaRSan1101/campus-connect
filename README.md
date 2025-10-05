@@ -1,152 +1,124 @@
 # Campus Connect — SEU Issue Tracker
 
-Campus Connect is a lightweight issue reporting and event management system built for Southeastern University (SEU). It provides students a way to register with their @seu.ac.lk email, submit campus issue reports (with optional photos), browse events, and includes an admin section for managing users, reports and events.
+Campus Connect is an academic project developed for the Faculty of Applied Sciences at Southeastern University. It implements a basic issue-reporting and event-management web application intended for educational and demonstration purposes.
 
-Short description (for GitHub "Repository description"):
+Repository description (one line):
 
-"Campus Connect — SEU Issue Tracker: PHP + MySQL backend with Bootstrap frontend for reporting campus issues and managing events."
+Campus Connect — SEU Issue Tracker: PHP + MySQL backend with Bootstrap frontend for reporting campus issues and managing events.
 
-## Table of Contents
+## Contents
 
 - About
-- Tech stack
-- Repository structure
-- Database (schema & import)
-- How to run locally (XAMPP/Windows)
-- API endpoints
-- Frontend routes / pages
-- Important files
-- Security & notes
+- Technology
+- Repository layout
+- Database
+- Local setup (Windows + XAMPP)
+- API reference
+- Frontend pages
+- Key files
+- Security considerations
 - Contributing
 
 ## About
-This repository contains a project developed as part of academic coursework at Southeastern University (Faculty of Applied Sciences). It was created to demonstrate a small full-stack web application for educational purposes.
 
-This project is intended as a small campus-focused web app. Students register using their SEU email, submit issues (with optional image evidence), and view/join campus events. Admins manage reports, events and user accounts via a separate admin UI.
+This project demonstrates a small full-stack web application. Core functionality includes user registration restricted to `@seu.ac.lk` addresses, report submission with optional image uploads, event listing and creation, and administrative interfaces for managing reports, events and users.
 
-## Tech stack
+## Technology
 
-- Backend: PHP (PDO) — simple REST-like endpoints in `backend/`
-- Database: MySQL (schema in `backend/database/campus_connect.sql`)
-- Frontend: Static HTML pages + Bootstrap 5 + vanilla JavaScript in `frontend/`
-- File uploads stored under `uploads/reports/`
+- Backend: PHP (PDO)
+- Database: MySQL
+- Frontend: HTML, Bootstrap 5, Vanilla JavaScript
+- File uploads: `uploads/reports/`
 
-## Repository structure
+## Repository layout
 
-Top-level layout:
+- `backend/` — PHP endpoints and `db.php` (database connection)
+  - `database/campus_connect.sql` — schema and table definitions
+  - Endpoint examples: `register.php`, `login.php`, `submit_report.php`, `get_reports.php`, `get_events.php`, `create_event.php`
+- `frontend/` — static pages and assets
+  - `pages/` — HTML pages (index, login, register, report, events, dashboard, admin)
+  - `assets/` — CSS, JS, and images
+- `uploads/` — uploaded report images
 
-- `backend/` — PHP API endpoints and `db.php` (PDO connection)
-  - `database/campus_connect.sql` — SQL schema and CREATE statements
-  - `register.php`, `login.php`, `submit_report.php`, `get_reports.php`, `get_recent_reports.php`, `get_events.php`, `create_event.php`, etc.
-- `frontend/` — static pages, assets and admin pages
-  - `pages/` — HTML pages (index, login, register, report, events, dashboard, admin/...)
-  - `assets/` — CSS, JS and images used by the frontend
-- `uploads/` — uploaded files (e.g. `uploads/reports/`)
+## Database
 
-## Database (schema & import)
+The SQL schema at `backend/database/campus_connect.sql` defines the following tables:
 
-The database schema is provided at `backend/database/campus_connect.sql`. It creates four main tables:
+- `users` (User_ID, Name, Email, Password, role, is_active, register_date)
+- `events` (ID, title, date, location, Status)
+- `reports` (ID, User_ID, Location, description, type, image, issue_address_date, submitted_date, phone, Status)
+- `activities` (id, type, description, created_at)
 
-- `users` — user accounts (User_ID, Name, Email, Password, role, is_active, register_date)
-- `events` — event records (ID, title, date, location, Status)
-- `reports` — issue reports (ID, User_ID, Location, description, type, image, issue_address_date, submitted_date, phone, Status)
-- `activities` — simple activity log (id, type, description, created_at)
+Import the schema using phpMyAdmin or MySQL CLI.
 
-Import steps (using phpMyAdmin or MySQL CLI):
+## Local setup (Windows + XAMPP)
 
-1. Start MySQL (e.g. via XAMPP).
-2. Open phpMyAdmin or run the mysql CLI and import `backend/database/campus_connect.sql`.
-
-## How to run locally (Windows + XAMPP)
-
-1. Requirements:
-   - XAMPP (Apache + PHP + MySQL)
-   - Git (optional)
-2. Put the project folder inside your web server root, e.g. `C:\xampp\htdocs\campus-connect` (looks like you already have this path).
-3. Start Apache and MySQL using the XAMPP Control Panel.
-4. Import the database schema `backend/database/campus_connect.sql` into MySQL:
-
-   - Using phpMyAdmin: http://localhost/phpmyadmin → Import → choose the SQL file → Go.
-   - OR using MySQL CLI (example):
+1. Install XAMPP (Apache, PHP, MySQL) and start Apache and MySQL.
+2. Place the project in the web root, for example: `C:\xampp\htdocs\campus-connect`.
+3. Import the SQL schema:
 
 ```powershell
 mysql -u root -p < "C:\xampp\htdocs\campus-connect\backend\database\campus_connect.sql"
 ```
 
-5. Edit database credentials if needed in `backend/db.php`. By default the project expects `host=localhost`, `user=root`, `pass=` and database name `campus_connect`.
-6. Ensure the uploads folder is writable by the webserver:
+4. If necessary, update database credentials in `backend/db.php` (default: host=localhost, user=root, pass=, db=campus_connect).
+5. Ensure the uploads directory exists and is writable by the web server:
 
 ```powershell
-# From an elevated PowerShell prompt (if needed)
 cd "C:\xampp\htdocs\campus-connect"
 mkdir -Force uploads\reports
 icacls uploads\reports /grant "IIS_IUSRS:(OI)(CI)F" /T
-# If using Apache under your user, alternatively grant your user full control
 ```
 
-7. Open the app in your browser:
+6. Open the application in a browser:
 
-- Student-facing: http://localhost/campus-connect/frontend/pages/index.html
-- Admin: http://localhost/campus-connect/frontend/pages/admin/admin-dashboard.html
+- http://localhost/campus-connect/frontend/pages/index.html (user-facing)
+- http://localhost/campus-connect/frontend/pages/admin/admin-dashboard.html (admin)
 
-## API endpoints (quick reference)
+## API reference (summary)
 
-Most endpoints are in `backend/` and return JSON.
+Endpoints are implemented as PHP scripts in `backend/`. Responses are JSON where applicable.
 
-- POST `backend/register.php` — register user (expects JSON: {name,email,password})
-- POST `backend/login.php` — login (expects JSON: {email,password}) — returns user info on success
-- POST `backend/submit_report.php` — submit report (multipart/form-data, fields: user_id, location, description, issueType, timeObserved, contactInfo, optional `photo` file)
-- GET `backend/get_reports.php` — list all reports (joined with user info)
-- GET `backend/get_recent_reports.php` — returns latest 5 reports
+- POST `backend/register.php` — register user (expects JSON: {name, email, password})
+- POST `backend/login.php` — authenticate (expects JSON: {email, password})
+- POST `backend/submit_report.php` — submit report (multipart/form-data; fields include user_id, location, description, issueType, timeObserved, contactInfo, optional photo)
+- GET `backend/get_reports.php` — list reports
+- GET `backend/get_recent_reports.php` — latest reports
 - GET `backend/get_events.php` — list events
-- POST `backend/create_event.php` — create a new event (form fields: title, date, location, status)
-- Other admin endpoints: `delete_event.php`, `delete_report.php`, `get_users.php`, `update_user.php`, `set_user_active.php`, `set_report_status.php`
+- POST `backend/create_event.php` — create event
 
-Notes: Endpoints expect requests from the frontend (relative paths are used in frontend JS). You may need to adjust the fetch URLs if you host the backend under a different path.
+Additional admin endpoints are available for deleting and updating resources.
 
-## Frontend pages / entrypoints
+## Frontend pages
 
 - `frontend/pages/index.html` — landing page
 - `frontend/pages/register.html` — registration
 - `frontend/pages/login.html` — login
 - `frontend/pages/report.html` — submit report
-- `frontend/pages/events.html` — list student events
+- `frontend/pages/events.html` — events list
 - `frontend/pages/dashboard.html` — student dashboard
-- `frontend/pages/admin/*` — admin dashboard and management UIs
+- `frontend/pages/admin/*` — admin interfaces
 
-Main JS files are in `frontend/assets/js/` and handle registration, login, report submission, and admin actions.
+Frontend scripts are located in `frontend/assets/js/` and handle client behavior and API calls.
 
-## Important files
+## Key files
 
-- `backend/db.php` — update DB credentials here
-- `backend/database/campus_connect.sql` — DB schema
-- `frontend/assets/js/register.js`, `login.js`, `report.js`, `manage-reports.js`, `manage-events.js` — main client logic
-- `uploads/reports/` — file uploads (images attached to reports)
+- `backend/db.php` — PDO connection; update credentials here
+- `backend/database/campus_connect.sql` — database schema
+- `frontend/assets/js/register.js`, `login.js`, `report.js`, `manage-reports.js`, `manage-events.js`
+- `uploads/reports/` — storage for uploaded images
 
-## Security & notes
+## Security considerations
 
-- Authentication is currently stateless and basic: login returns user info which the frontend stores in `localStorage`. For production, migrate to server-side sessions or JWT with proper refresh/expiration.
-- No CSRF protection on forms — add CSRF tokens for POST endpoints if you make this public.
-- File uploads are moved to `uploads/reports/` without deep validation — validate file MIME types and scan for malicious payloads before deploying.
-- Passwords use PHP's `password_hash`, which is good. Ensure HTTPS in production.
+- Authentication: the current implementation returns user information to the frontend and relies on `localStorage`. For production use, implement secure server-side sessions or token-based authentication.
+- CSRF: POST endpoints do not implement CSRF protection. Add CSRF tokens when exposing the application publicly.
+- File uploads: validate file types and size server-side and consider virus scanning.
+- Transport: use HTTPS in production.
 
 ## Contributing
 
-If you want to contribute:
+Contributions are accepted via pull requests. Follow standard GitHub workflow: fork, branch, commit, and submit a PR with a description of changes and any setup steps.
 
-- Fork the repo and create a feature branch
-- Run the app locally and test changes
-- Open a PR with a concise description of the change
-
-## Suggested GitHub topics
+## Topics
 
 php, mysql, bootstrap, webapp, issue-tracker, education
-
----
-
-If you'd like, I can now:
-- Commit this README.md to the repository (done) and open it for review
-- Add a short CONTRIBUTING.md or a minimal .gitignore
-- Create a short repo description and topics in a GitHub-ready format
-
-Tell me what you'd like next.
